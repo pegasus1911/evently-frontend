@@ -34,7 +34,7 @@ const leave = async (eventId) => {
 const list = async (eventId) => {
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`${BASE_URL}/${eventId}/attendees`, {
+        const res = await fetch(`${BASE_URL}/${eventId}/attend`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`
