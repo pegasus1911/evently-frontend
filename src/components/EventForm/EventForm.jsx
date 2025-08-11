@@ -9,7 +9,7 @@ const EventForm = (props) => {
         title: "",
         image: "",
         description: "",
-        dateTime: "",
+        date: "",
         location: "",
         capacity: "",
         // price: "",
@@ -84,18 +84,14 @@ const EventForm = (props) => {
                 />
 
                 <label htmlFor="capacity-input">Capacity</label>
-                <select
+                <input
+                    required
+                    type="text"
                     name="capacity"
                     id="capacity-input"
                     value={formData.capacity}
                     onChange={handleChange}
-                >
-                    <option value={0}>Unlimited</option>
-                    <option value={10}>10</option>
-                    <option value={25}>25</option>
-                    <option value={50}>50</option>
-                    <option value={100}>100</option>
-                </select>
+                />
 
                 <button type="submit">SUBMIT</button>
             </form>
