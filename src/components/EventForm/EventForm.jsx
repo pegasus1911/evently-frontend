@@ -11,7 +11,7 @@ const EventForm = (props) => {
         description: "",
         date: "",
         location: "",
-        capacity: "",
+        capacity: "0",
         // price: "",
     }// this will make sure the form is empty for a new event
 

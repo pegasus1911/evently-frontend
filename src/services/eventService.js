@@ -34,12 +34,14 @@ const create = async (formData) => {
       body: JSON.stringify(formData),
     });
 
-    return res.json();
-
-  } catch(error){
-    console.log(error);
+    const data = await res.json()
+    if (!res.ok) throw new Error(data?.message || data || 'Create failed')
+    return data
+  } catch (error) {
+    console.error('Create event error:', error)
+    throw error
   }
-};
+}
 
 // edit an event 
 const update = async (formData, eventId) => {
