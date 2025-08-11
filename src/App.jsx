@@ -2,11 +2,13 @@ import './App.css'
 import NavBar from './components/NavBar/NavBar'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
-import { Route, Routes } from 'react-router-dom'
-import * as authService from './services/authService.js';
+import EventDetails from './components/EventDetails/EventDetails.jsx';
 import EventForm from './components/EventForm/EventForm.jsx';
+import EventList from './components/EventList/EventList.jsx';
+import * as authService from './services/authService.js';
+import { Route, Routes } from 'react-router-dom'
 import * as eventService from './services/eventService.js';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const App = () => {
 
@@ -54,19 +56,41 @@ const App = () => {
   };
 
   return (
-    <>
-      <NavBar user={user} handleSignOut={handleSignOut} />
-      <Routes>
-          <Route path='/' element={<h1>Hello world!</h1>} />
-          <Route path='/events/new' element={<EventForm handleAddEvent={handleAddEvent} />}/>
-          <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
-          <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
-          <Route path='*' element={<h1>404</h1>} />
-    </Routes>
-    </>
+  <>
+    <NavBar user={user} handleSignOut={handleSignOut} />
+    <Routes>
 
-    
-  )
+      {user ? (
+        // Protected Routes
+        <>
+          <Route
+            path="/events/new"
+            element={<EventForm handleAddEvent={handleAddEvent} />}
+          />
+         
+        </>
+      ) : (
+        // Public Routes
+        <>
+          <Route
+            path="/sign-up"
+            element={<SignUp handleSignUp={handleSignUp} user={user} />}
+          />
+          <Route
+            path="/sign-in"
+            element={<SignIn handleSignIn={handleSignIn} user={user} />}
+          />
+        </>
+      )}
+
+      {/* Public routes visible to everyone */}
+      <Route path="/" element={<h1>Welcome to Evently</h1>} />
+      <Route path="/events" element={<EventList events={events} />} />
+      <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+    </Routes>
+  </>
+)
+
 }
 
 export default App
