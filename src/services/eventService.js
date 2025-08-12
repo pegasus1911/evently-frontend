@@ -44,37 +44,25 @@ const create = async (formData) => {
 }
 
 // edit an event 
-// const update = async (formData, eventId) => {
-//   try{
-//     const token = localStorage.getItem('token');
-//     const res = await fetch(`${BASE_URL}/${eventId}`, {
-//       method: "POST",
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${token}`
-//       },
-//       body: JSON.stringify(formData)
-//     });
-
-//     return res.json();
-
-//   } catch(error){
-//     console.log(error);
-//   }
-// };
 const update = async (formData, eventId) => {
-  const token = localStorage.getItem('token');
-  const res = await fetch(`${BASE_URL}/${eventId}`, {
-    method: 'PUT', // <-- was POST
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(formData),
-  });
-  if (!res.ok) throw new Error('Update failed');
-  return res.json();
+  try{
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${BASE_URL}/${eventId}`, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(formData)
+    });
+
+    return res.json();
+
+  } catch(error){
+    console.log(error);
+  }
 };
+
 
 
 // delete an event
