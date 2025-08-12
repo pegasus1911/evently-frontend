@@ -55,7 +55,9 @@ const App = () => {
   };
 
   const handleAddEvent = async (formData) => {
-    await eventService.create(formData);
+   const newEvent =  await eventService.create(formData);
+    setEvents([...events, newEvent]);
+    navigate('/events')
   };
 
   const handleDeleteEvent = async (eventId) => {
