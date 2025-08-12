@@ -9,11 +9,11 @@ const EventForm = (props) => {
         title: "",
         image: "",
         description: "",
-        date: "",
+        date: "",          
         location: "",
         capacity: "0",
-        // price: "",
-    }// this will make sure the form is empty for a new event
+        isPublic: true,    
+    };
 
     const [formData, setFormData] = useState(initialState)// formData is the state that will hold the form data
 
@@ -63,13 +63,13 @@ const EventForm = (props) => {
                     onChange={handleChange}
                 />
 
-                <label htmlFor="dateTime-input">Date & Time</label>
+                <label htmlFor="date-input">Date & Time</label>
                 <input
                     required
                     type="datetime-local"
-                    name="dateTime"
-                    id="dateTime-input"
-                    value={formData.dateTime}
+                    name="date"
+                    id="date-input"
+                    value={formData.date}
                     onChange={handleChange}
                 />
 
@@ -81,6 +81,14 @@ const EventForm = (props) => {
                     id="location-input"
                     value={formData.location}
                     onChange={handleChange}
+                />
+                <label htmlFor="isPublic-input">Public event?</label>
+                <input
+                    type="checkbox"
+                    name="isPublic"
+                    id="isPublic-input"
+                    checked={!!formData.isPublic}
+                    onChange={(e) => setFormData(f => ({ ...f, isPublic: e.target.checked }))}
                 />
 
                 <label htmlFor="capacity-input">Capacity</label>
