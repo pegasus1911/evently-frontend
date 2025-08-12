@@ -9,10 +9,10 @@ const EventForm = (props) => {
         title: "",
         image: "",
         description: "",
-        date: "",          
+        date: "",
         location: "",
         capacity: "0",
-        isPublic: true,    
+        isPublic: true,
     };
 
     const [formData, setFormData] = useState(initialState)// formData is the state that will hold the form data
