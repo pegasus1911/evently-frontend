@@ -55,6 +55,11 @@ const App = () => {
     await eventService.create(formData);
   };
 
+  const handleDeleteEvent = async (eventId) => {
+    await eventService.deleteEvent(eventId);
+    setEvents(events.filter((event => event._id !== eventId)));
+  }
+
   return (
   <>
     <NavBar user={user} handleSignOut={handleSignOut} />
@@ -86,6 +91,7 @@ const App = () => {
       {/* Public routes visible to everyone */}
       <Route path="/" element={<h1>Welcome to Evently</h1>} />
       <Route path="/events" element={<EventList events={events} />} />
+      <Route path="/events/:eventId" element={<EventDetails user={user} handleDeleteEvent={handleDeleteEvent} />}/>
       <Route path="*" element={<h1>404 - Page Not Found</h1>} />
     </Routes>
   </>
