@@ -36,12 +36,12 @@ const EventDetails = (props) => {
         </p>
         <p>{event.description}</p>
     
-        {/* {event.owner._id === props.user._id && ( */}
+        {event.owner._id === props.user._id && (
           <>
             <Link to={`/events/${eventId}/edit`}>Edit</Link>
             <button onClick={() => props.handleDeleteEvent(eventId)}>Delete</button>
           </>
-        {/* )} */}
+        )}
       </header>
     
     </main>
