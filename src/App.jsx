@@ -6,11 +6,14 @@ import EventDetails from './components/EventDetails/EventDetails.jsx';
 import EventForm from './components/EventForm/EventForm.jsx';
 import EventList from './components/EventList/EventList.jsx';
 import * as authService from './services/authService.js';
-import { Route, Routes } from 'react-router-dom'
 import * as eventService from './services/eventService.js';
 import { useState, useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom'
+
 
 const App = () => {
+  const navigate = useNavigate()
+
 
   const initialState = authService.getUser()
 
@@ -23,8 +26,8 @@ const App = () => {
       setEvents(eventData);
     };
 
-      fetchAllEvents();
-  },[]);
+    fetchAllEvents();
+  }, []);
 
 
 
@@ -34,7 +37,7 @@ const App = () => {
       setUser(res)
       // return success
       return { success: true }
-    } catch(err){
+    } catch (err) {
       // return failure flag (then signup form can display message)
       // add message?
       return { success: false, message: err.message }
@@ -51,51 +54,62 @@ const App = () => {
     setUser(res)
   };
 
-  const handleAddEvent = async(formData) => {
+  const handleAddEvent = async (formData) => {
     await eventService.create(formData);
   };
 
   const handleDeleteEvent = async (eventId) => {
     await eventService.deleteEvent(eventId);
     setEvents(events.filter((event => event._id !== eventId)));
+        navigate('/events')
+
+  }
+  const handleUpdateEvent = async (formData, eventId) => {
+    await eventService.update(formData, eventId)
+    navigate(`/events/${eventId}`)
   }
 
   return (
-  <>
-    <NavBar user={user} handleSignOut={handleSignOut} />
-    <Routes>
+    <>
+      <NavBar user={user} handleSignOut={handleSignOut} />
+      <Routes>
 
-      {user ? (
-        // Protected Routes
-        <>
-          <Route
-            path="/events/new"
-            element={<EventForm handleAddEvent={handleAddEvent} />}
-          />
-         
-        </>
-      ) : (
-        // Public Routes
-        <>
-          <Route
-            path="/sign-up"
-            element={<SignUp handleSignUp={handleSignUp} user={user} />}
-          />
-          <Route
-            path="/sign-in"
-            element={<SignIn handleSignIn={handleSignIn} user={user} />}
-          />
-        </>
-      )}
+        {user ? (
+          // Protected Routes
+          <>
+            <Route
+              path="/events/new"
+              element={<EventForm handleAddEvent={handleAddEvent} />}
+            />
+            <Route
+              path="/events/:eventId/edit"
+              element={<EventForm mode="edit" handleUpdateEvent={handleUpdateEvent} />}
+            />
 
-      {/* Public routes visible to everyone */}
-      <Route path="/" element={<h1>Welcome to Evently</h1>} />
-      <Route path="/events" element={<EventList events={events} />} />
-      <Route path="/events/:eventId" element={<EventDetails user={user} handleDeleteEvent={handleDeleteEvent} />}/>
-      <Route path="*" element={<h1>404 - Page Not Found</h1>} />
-    </Routes>
-  </>
-)
+          </>
+        ) : (
+          // Public Routes
+          <>
+            <Route
+              path="/sign-up"
+              element={<SignUp handleSignUp={handleSignUp} user={user} />}
+            />
+            <Route
+              path="/sign-in"
+              element={<SignIn handleSignIn={handleSignIn} user={user} />}
+            />
+
+          </>
+        )}
+
+        {/* Public routes visible to everyone */}
+        <Route path="/" element={<h1>Welcome to Evently</h1>} />
+        <Route path="/events" element={<EventList events={events} />} />
+        <Route path="/events/:eventId" element={<EventDetails user={user} handleDeleteEvent={handleDeleteEvent} />} />
+        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+      </Routes>
+    </>
+  )
 
 }
 
