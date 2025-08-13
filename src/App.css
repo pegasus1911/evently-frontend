@@ -299,3 +299,16 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
 .btn{ padding:.7rem 1rem; border-radius:12px; font-weight:600; text-decoration:none; display:inline-block; }
 .btn.primary{ background:#3153ff; color:#fff; }
 .btn.ghost{ border:1px solid #3a52b8; color:#c7d2ff; }
+
+/* Target the image inside the paragraph */
+p img {
+  width: 100%;          /* Makes the image responsive */
+  max-width: 300px;     /* Optional: limits the image size */
+  height: auto;         /* Keeps aspect ratio */
+  display: block;       /* Removes inline spacing */
+  margin: 0 auto;       /* Centers the image horizontally */
+  border-radius: 10px;  /* Optional: rounded corners */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Optional: subtle shadow */
+  object-fit: cover;    /* Ensures image fills the container nicely */
+}
+

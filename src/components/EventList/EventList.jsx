@@ -8,12 +8,17 @@ const EventList = (props) => {
       {!props.events?.length && <p>No events yet.</p>}
 
       {props.events?.map((event) => {
+        console.log(event.image)
         const when = event.date ? new Date(event.date).toLocaleString() : null;
 
         return (
           <Link key={event._id} to={`/events/${event._id}`}>
             <article>
               <header>
+                <p>
+                 <img src={event.image?.url} alt="Event logo" />
+
+                </p>
                 <h2>{event.title}</h2>
                 <p>
                   posted by: {event.owner?.username}{' '}
@@ -24,13 +29,6 @@ const EventList = (props) => {
               <p>
                 Description: <br />{event.description}
               </p>
-
-              {/* Location display */}
-              {event.locationName && event.location?.lat && event.location?.lng && (
-                <p>
-                  📍 {event.locationName}
-                </p>
-              )}
               {/* Event date/time display */}
               {when && (
                 <p>
