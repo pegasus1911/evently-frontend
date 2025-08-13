@@ -13,7 +13,7 @@ const NavBar = (props) => {
 
         <div className="nav-links">
           {/* <Link to="/">Home</Link> */}
-          <Link to="/events">Explore the events</Link>
+          <Link to="/events">Explore the events here</Link>
           {props.user && <Link to="/events/new">New Event</Link>}
 
           {props.user ? (
