@@ -23,13 +23,15 @@ const create = async (formData) => {
   try{
     const token = localStorage.getItem('token');
 
-    const res = await fetch(BASE_URL, {
+     const res = await fetch(BASE_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        // since we're sending multi-part/formdata also, the content type isn't JUST JSON
+        // 'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(formData),
+      // don't stringify the formData
+      body: formData,
     });
 
     const data = await res.json()

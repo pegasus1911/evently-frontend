@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import * as eventService from "../../services/eventService"
-import MapComponent from '../MapComponent/MapComponent';
 const EventForm = (props) => {
     const { eventId } = useParams()
 
@@ -10,8 +9,6 @@ const EventForm = (props) => {
   image: "",
   description: "",
   date: "",
-  location: { lat: null, lng: null },
-  locationName: "",
   capacity: "0",
   isPublic: true,
 };
@@ -34,13 +31,26 @@ const EventForm = (props) => {
     const handleSubmit = (evt) => {
         evt.preventDefault()
 
+        // create a new instance of FormData (comes from the browser and is specifically for multipart/form-data)
+        const fd = new FormData()
+        fd.append('title', formData.title)
+        fd.append('description', formData.description)
+        fd.append('date', formData.date)
+        fd.append('location', formData.location)
+        fd.append('capacity', String(formData.capacity))
+        fd.append('isPublic', String(!!formData.isPublic))
+        if (formData.image instanceof File) {
+            fd.append('image', formData.image)
+        }
+
         if (eventId) {
             props.handleUpdateEvent(formData, eventId)
         } else {
-            props.handleAddEvent(formData)
+            props.handleAddEvent(fd)
         }
     }
 
+   
     return (
         <main>
             <form onSubmit={handleSubmit}>
@@ -75,22 +85,6 @@ const EventForm = (props) => {
                     onChange={handleChange}
                 />
                 <br></br>
-               <label>Pick a Location:</label>
-<MapComponent
-  initialPosition={formData.location}
-  onLocationChange={({ lat, lng, locationName }) =>
-    setFormData((f) => ({
-      ...f,
-      location: { lat, lng },
-      locationName: locationName || f.locationName,
-    }))
-  }
-/>
-{formData.locationName && (
-  <p>
-    <strong>Selected Location:</strong> {formData.locationName}
-  </p>
-)}
                 <label htmlFor="isPublic-input">Public event? </label>
                 <input
                     type="checkbox"
@@ -108,6 +102,16 @@ const EventForm = (props) => {
                     id="capacity-input"
                     value={formData.capacity}
                     onChange={handleChange}
+                />
+                <br></br>
+
+                <label htmlFor="image">image</label>
+                <input
+                    type="file"
+                    name="image"
+                    id="image-input"
+                    accept="image/*"
+                    onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
                 />
                 <br></br>
                 <button type="submit">SUBMIT</button>
