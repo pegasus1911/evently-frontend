@@ -24,16 +24,12 @@ const SignUp = (props) => {
     setFormData({...formData, [evt.target.name]: evt.target.value})
   }
 
-  // made this function asynchronous
   const handleSubmit = async (evt) => {
     evt.preventDefault()  
-    // saved the return as "result"
     const result = await props.handleSignUp(formData)
-    // if sign up is succssful, navigate to home
     if (result.success){
       navigate('/')
     } else {
-      // otherwise, set the error message state 
       setError(result.message)
     }
   }
@@ -47,7 +43,6 @@ const SignUp = (props) => {
   return (
     <main>
       <h1>Sign up Form</h1>
-      {/* add error message display to form */}
       {error}
       <form onSubmit={handleSubmit}>
         <label>Username:</label>
