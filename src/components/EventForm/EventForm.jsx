@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import * as eventService from "../../services/eventService"
+import MapComponent from '../MapComponent/MapComponent';
 const EventForm = (props) => {
     const { eventId } = useParams()
 
-    const initialState = {
-        title: "",
-        image: "",
-        description: "",
-        date: "",
-        location: "",
-        capacity: "0",
-        isPublic: true,
-    };
+ const initialState = {
+  title: "",
+  image: "",
+  description: "",
+  date: "",
+  location: { lat: null, lng: null },
+  locationName: "",
+  capacity: "0",
+  isPublic: true,
+};
+
 
     const [formData, setFormData] = useState(initialState)
 
@@ -72,16 +75,22 @@ const EventForm = (props) => {
                     onChange={handleChange}
                 />
                 <br></br>
-                <label htmlFor="location-input">Location: </label>
-                <input
-                    required
-                    type="text"
-                    name="location"
-                    id="location-input"
-                    value={formData.location}
-                    onChange={handleChange}
-                />
-                <br></br>
+               <label>Pick a Location:</label>
+<MapComponent
+  initialPosition={formData.location}
+  onLocationChange={({ lat, lng, locationName }) =>
+    setFormData((f) => ({
+      ...f,
+      location: { lat, lng },
+      locationName: locationName || f.locationName,
+    }))
+  }
+/>
+{formData.locationName && (
+  <p>
+    <strong>Selected Location:</strong> {formData.locationName}
+  </p>
+)}
                 <label htmlFor="isPublic-input">Public event? </label>
                 <input
                     type="checkbox"

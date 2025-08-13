@@ -1,4 +1,5 @@
 import './App.css'
+import Home from './components/Home/Home.jsx'
 import NavBar from './components/NavBar/NavBar'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
@@ -14,7 +15,6 @@ import MapComponent from './components/MapComponent/MapComponent.jsx';
 const App = () => {
   const navigate = useNavigate()
 
-
   const initialState = authService.getUser();
   const [refresh, toggleRefresh] = useState(false);
 
@@ -29,8 +29,6 @@ const App = () => {
 
     fetchAllEvents();
   }, [refresh]);
-
-
 
   const handleSignUp = async (formData) => {
     try {
@@ -52,10 +50,9 @@ const App = () => {
       setUser(res)                                   // now res is the decodedd user
       return { success: true }
     } catch (err) {
-      return { success: false, message: 'Username or password is incorrect' }
+      return { success: false, message: err.message }
     }
   }
-
 
   const handleAddEvent = async (formData) => {
     const newEvent = await eventService.create(formData);
@@ -108,8 +105,7 @@ const App = () => {
 
           </>
         )}
-
-        <Route path="/" element={<h1>Welcome to Evently</h1>} />
+        <Route path="/" element={<Home user={user} />} />
         <Route path="/events" element={<EventList events={events} />} />
         <Route path="/events/:eventId" element={<EventDetails user={user} handleDeleteEvent={handleDeleteEvent} />} />
               <Route path="/map" element={<MapComponent />} />

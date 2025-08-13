@@ -16,7 +16,7 @@ function MapComponent({ initialPosition, onLocationChange }) {
     libraries: ['places'],
   });
 
-  // Use initialPosition if valid, else fallback to center
+
   const [markerPosition, setMarkerPosition] = useState(
     initialPosition?.lat && initialPosition?.lng ? initialPosition : center
   );
@@ -46,7 +46,7 @@ function MapComponent({ initialPosition, onLocationChange }) {
       onLocationChange({
         lat: newPos.lat,
         lng: newPos.lng,
-        locationName: "", // No address when dragged, but you can improve later with reverse geocode
+        locationName: "", 
       });
     }
   };
@@ -82,4 +82,3 @@ function MapComponent({ initialPosition, onLocationChange }) {
 }
 
 export default MapComponent;
-
