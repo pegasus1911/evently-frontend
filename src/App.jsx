@@ -10,10 +10,8 @@ import * as eventService from './services/eventService.js';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom'
 
-
 const App = () => {
   const navigate = useNavigate()
-
 
   const initialState = authService.getUser();
   const [refresh, toggleRefresh] = useState(false);
@@ -29,8 +27,6 @@ const App = () => {
 
     fetchAllEvents();
   }, [refresh]);
-
-
 
   const handleSignUp = async (formData) => {
     try {
@@ -52,10 +48,9 @@ const App = () => {
       setUser(res)                                   // now res is the decodedd user
       return { success: true }
     } catch (err) {
-      return { success: false, message: 'Username or password is incorrect' }
+      return { success: false, message: err.message }
     }
   }
-
 
   const handleAddEvent = async (formData) => {
     const newEvent = await eventService.create(formData);

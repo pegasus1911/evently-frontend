@@ -26,6 +26,7 @@ const EventList = (props) => {
             <p>Location: <br></br>{event.location}</p>
 
           </article>
+          <br></br>
         </Link>
       ))}
     </main>
