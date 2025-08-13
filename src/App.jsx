@@ -1,4 +1,5 @@
 import './App.css'
+import Home from './components/Home/Home.jsx'
 import NavBar from './components/NavBar/NavBar'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
@@ -108,8 +109,7 @@ const App = () => {
 
           </>
         )}
-
-        <Route path="/" element={<h1>Welcome to Evently</h1>} />
+        <Route path="/" element={<Home user={user} />} />
         <Route path="/events" element={<EventList events={events} />} />
         <Route path="/events/:eventId" element={<EventDetails user={user} handleDeleteEvent={handleDeleteEvent} />} />
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />
