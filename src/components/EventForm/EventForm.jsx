@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react"// manages local state and useffect fetchs event data while editing 
-import { useParams } from "react-router-dom"// useParams is used to access the event ID from the URL
-import * as eventService from "../../services/eventService"// importing all functions from eventService
-// declaring event form component
+import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
+import * as eventService from "../../services/eventService"
 const EventForm = (props) => {
-    const { eventId } = useParams()// looks for a route param named :id and aliases it to eventId
+    const { eventId } = useParams()
 
     const initialState = {
         title: "",
@@ -15,18 +14,18 @@ const EventForm = (props) => {
         isPublic: true,
     };
 
-    const [formData, setFormData] = useState(initialState)// formData is the state that will hold the form data
+    const [formData, setFormData] = useState(initialState)
 
     useEffect(() => {
         const fetchEvent = async () => {
-            const data = await eventService.show(eventId)// fetching the event data using the show function from eventService
-            setFormData(data)// setting the formData state with the fetched data
+            const data = await eventService.show(eventId)
+            setFormData(data)
         }
-        if (eventId) fetchEvent()// if eventId exists, fetch the event data
-    }, [eventId])// useEffect will run when eventId changes
+        if (eventId) fetchEvent()
+    }, [eventId])
 
     const handleChange = (evt) => {
-        setFormData({ ...formData, [evt.target.name]: evt.target.value })// updating formData state with the new value
+        setFormData({ ...formData, [evt.target.name]: evt.target.value })
     }
 
     const handleSubmit = (evt) => {

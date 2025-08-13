@@ -1,6 +1,5 @@
 const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/events`;
 
-// get the data from event database
 const index = async () => {
   try{
     const res = await fetch(BASE_URL);
@@ -10,7 +9,6 @@ const index = async () => {
   }
 };
 
-// show an event 
 const show = async (eventId) => {
   try{
     const res = await fetch(`${BASE_URL}/${eventId}`);
@@ -43,7 +41,6 @@ const create = async (formData) => {
   }
 }
 
-// edit an event 
 const update = async (formData, eventId) => {
   try{
     const token = localStorage.getItem('token');
@@ -65,7 +62,6 @@ const update = async (formData, eventId) => {
 
 
 
-// delete an event
 const deleteEvent = async (eventId) => {
   try{
     const token = localStorage.getItem('token');

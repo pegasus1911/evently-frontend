@@ -35,7 +35,6 @@ const App = () => {
     try {
       const res = await authService.signUp(formData)
       setUser(res)
-      // return success
       return { success: true }
     } catch (err) {
       return { success: false, message: err.message }
@@ -108,7 +107,6 @@ const App = () => {
           </>
         )}
 
-        {/* Public routes visible to everyone */}
         <Route path="/" element={<h1>Welcome to Evently</h1>} />
         <Route path="/events" element={<EventList events={events} />} />
         <Route path="/events/:eventId" element={<EventDetails user={user} handleDeleteEvent={handleDeleteEvent} />} />
