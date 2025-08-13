@@ -15,7 +15,8 @@ const App = () => {
   const navigate = useNavigate()
 
 
-  const initialState = authService.getUser()
+  const initialState = authService.getUser();
+  const [refresh, toggleRefresh] = useState(false);
 
   const [user, setUser] = useState(initialState);
   const [events, setEvents] = useState([]);
@@ -27,7 +28,7 @@ const App = () => {
     };
 
     fetchAllEvents();
-  }, []);
+  }, [refresh]);
 
 
 
@@ -70,7 +71,8 @@ const App = () => {
   }
   const handleUpdateEvent = async (formData, eventId) => {
     const updatedEvent = await eventService.update(formData, eventId);
-    setEvents([...events, updatedEvent])
+    setEvents([...events, updatedEvent]);
+    toggleRefresh(!refresh);
     navigate(`/events/${eventId}`)
   }
 
