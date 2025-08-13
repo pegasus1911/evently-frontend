@@ -38,8 +38,6 @@ const App = () => {
       // return success
       return { success: true }
     } catch (err) {
-      // return failure flag (then signup form can display message)
-      // add message?
       return { success: false, message: err.message }
     }
   }
@@ -48,14 +46,19 @@ const App = () => {
     localStorage.removeItem('token')
     setUser(null)
   }
-
   const handleSignIn = async (formData) => {
-    const res = await authService.signIn(formData)
-    setUser(res)
-  };
+    try {
+      const res = await authService.signIn(formData) // too set internal token
+      setUser(res)                                   // now res is the decodedd user
+      return { success: true }
+    } catch (err) {
+      return { success: false, message: 'Username or password is incorrect' }
+    }
+  }
+
 
   const handleAddEvent = async (formData) => {
-   const newEvent =  await eventService.create(formData);
+    const newEvent = await eventService.create(formData);
     setEvents([...events, newEvent]);
     navigate('/events')
   };
@@ -63,11 +66,12 @@ const App = () => {
   const handleDeleteEvent = async (eventId) => {
     await eventService.deleteEvent(eventId);
     setEvents(events.filter((event => event._id !== eventId)));
-        navigate('/events')
+    navigate('/events')
 
   }
   const handleUpdateEvent = async (formData, eventId) => {
-    await eventService.update(formData, eventId)
+    const updatedEvent = await eventService.update(formData, eventId);
+    setEvents([...events, updatedEvent])
     navigate(`/events/${eventId}`)
   }
 
