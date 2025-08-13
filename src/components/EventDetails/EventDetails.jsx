@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import * as eventService from '../../services/eventService'
 import * as attendanceService from '../../services/attendanceService'
+import MapComponent from '../MapComponent/MapComponent';
 
 const EventDetails = (props) => {
 
@@ -69,6 +70,10 @@ const EventDetails = (props) => {
           {event.date ? new Date(event.date).toLocaleDateString() : ""}
         </p>
         <p>{event.description}</p>
+
+        {event.location && event.location.lat && event.location.lng && (
+  <MapComponent initialPosition={event.location} readOnly={true} />
+)}
 
         {isOwner && (
           <>
