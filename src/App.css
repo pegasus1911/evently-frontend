@@ -287,6 +287,11 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
   background:#2a3bc7;color:#fff;font-weight:700;
 }
 
+ .map-container {
+  height: 400px;
+  width: 100%;
+} 
+
 /* ---------- FINAL CTA ---------- */
 .final-cta{ text-align:center; padding-bottom: 3rem; }
 
