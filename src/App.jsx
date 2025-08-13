@@ -9,7 +9,7 @@ import * as authService from './services/authService.js';
 import * as eventService from './services/eventService.js';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom'
-
+import MapComponent from './components/MapComponent/MapComponent.jsx';
 
 const App = () => {
   const navigate = useNavigate()
@@ -112,6 +112,7 @@ const App = () => {
         <Route path="/" element={<h1>Welcome to Evently</h1>} />
         <Route path="/events" element={<EventList events={events} />} />
         <Route path="/events/:eventId" element={<EventDetails user={user} handleDeleteEvent={handleDeleteEvent} />} />
+              <Route path="/map" element={<MapComponent />} />
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />
       </Routes>
     </>

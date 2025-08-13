@@ -6,24 +6,48 @@ import {
   Autocomplete,
 } from '@react-google-maps/api';
 
-import '../../App.css';  // Import the CSS file
+import '../../App.css';
 
 const center = { lat: 26.0667, lng: 50.5577 }; // Bahrain
 
-function MapComponent() {
+function MapComponent({ initialPosition, onLocationChange }) {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries: ['places'],
   });
 
-  const [markerPosition, setMarkerPosition] = useState(center);
+  // Use initialPosition if valid, else fallback to center
+  const [markerPosition, setMarkerPosition] = useState(
+    initialPosition?.lat && initialPosition?.lng ? initialPosition : center
+  );
   const autocompleteRef = useRef(null);
 
   const handlePlaceChanged = () => {
     const place = autocompleteRef.current.getPlace();
     if (place.geometry) {
       const location = place.geometry.location;
-      setMarkerPosition({ lat: location.lat(), lng: location.lng() });
+      const newPos = { lat: location.lat(), lng: location.lng() };
+      setMarkerPosition(newPos);
+      if (onLocationChange) {
+        // Pass lat, lng, and locationName (address) back to parent
+        onLocationChange({
+          lat: newPos.lat,
+          lng: newPos.lng,
+          locationName: place.formatted_address || place.name || "",
+        });
+      }
+    }
+  };
+
+  const handleMarkerDrag = (e) => {
+    const newPos = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+    setMarkerPosition(newPos);
+    if (onLocationChange) {
+      onLocationChange({
+        lat: newPos.lat,
+        lng: newPos.lng,
+        locationName: "", // No address when dragged, but you can improve later with reverse geocode
+      });
     }
   };
 
@@ -32,14 +56,10 @@ function MapComponent() {
   return (
     <>
       <Autocomplete
-        onLoad={ref => (autocompleteRef.current = ref)}
+        onLoad={(ref) => (autocompleteRef.current = ref)}
         onPlaceChanged={handlePlaceChanged}
       >
-        <input
-          type="text"
-          placeholder="Enter a location"
-          className="location-input"
-        />
+        <input type="text" placeholder="Enter a location" className="location-input" />
       </Autocomplete>
 
       <GoogleMap
@@ -50,12 +70,7 @@ function MapComponent() {
         <Marker
           position={markerPosition}
           draggable={true}
-          onDragEnd={(e) =>
-            setMarkerPosition({
-              lat: e.latLng.lat(),
-              lng: e.latLng.lng(),
-            })
-          }
+          onDragEnd={handleMarkerDrag}
         />
       </GoogleMap>
 
@@ -67,3 +82,4 @@ function MapComponent() {
 }
 
 export default MapComponent;
+

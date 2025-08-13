@@ -23,7 +23,14 @@ const EventList = (props) => {
               )}
             </header>
             <p>Description: <br></br>{event.description}</p>
-            <p>Location: <br></br>{event.location}</p>
+            <p>
+  <strong>Location:</strong><br />
+  {event.locationName
+    ? event.locationName
+    : event.location
+    ? `${event.location.lat}, ${event.location.lng}`
+    : "No location provided"}
+</p>
 
           </article>
         </Link>
