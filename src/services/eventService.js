@@ -20,6 +20,7 @@ const show = async (eventId) => {
 };
 
 const create = async (formData) => {
+  console.log(formData)
   try{
     const token = localStorage.getItem('token');
 
@@ -29,10 +30,12 @@ const create = async (formData) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(formData),
+      // body: JSON.stringify(formData),
+      body: formData,
     });
 
     const data = await res.json()
+    console.log(data)
     if (!res.ok) throw new Error(data?.message || data || 'Create failed')
     return data
   } catch (error) {

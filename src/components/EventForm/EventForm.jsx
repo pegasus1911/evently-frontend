@@ -28,6 +28,10 @@ const EventForm = (props) => {
         setFormData({ ...formData, [evt.target.name]: evt.target.value })
     }
 
+    const handleImage = (event) => {
+    setFormData({ ...formData,[event.target.name] : event.target.files[0]});
+     }
+
     const handleSubmit = (evt) => {
         evt.preventDefault()
 
@@ -40,7 +44,7 @@ const EventForm = (props) => {
 
     return (
         <main>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <h1>{eventId ? 'Edit Event' : 'New Event'}</h1>
                 <br></br>
                 <label htmlFor="title-input">Title: </label>
@@ -101,6 +105,15 @@ const EventForm = (props) => {
                     onChange={handleChange}
                 />
                 <br></br>
+                <label htmlFor="image">Image:</label>
+                <input 
+                type="file"
+                accept="image/*"
+                name="image"
+                id="image"
+                // value={formData.image}
+                onChange={handleImage}
+                 />
                 <button type="submit">SUBMIT</button>
             </form>
         </main>
