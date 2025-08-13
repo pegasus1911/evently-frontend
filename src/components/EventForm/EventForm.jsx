@@ -43,8 +43,8 @@ const EventForm = (props) => {
         <main>
             <form onSubmit={handleSubmit}>
                 <h1>{eventId ? 'Edit Event' : 'New Event'}</h1>
-
-                <label htmlFor="title-input">Title</label>
+                <br></br>
+                <label htmlFor="title-input">Title: </label>
                 <input
                     required
                     type="text"
@@ -53,8 +53,8 @@ const EventForm = (props) => {
                     value={formData.title}
                     onChange={handleChange}
                 />
-
-                <label htmlFor="description-input">Description</label>
+                <br></br>
+                <label htmlFor="description-input">Description: </label>
                 <textarea
                     required
                     name="description"
@@ -62,8 +62,8 @@ const EventForm = (props) => {
                     value={formData.description}
                     onChange={handleChange}
                 />
-
-                <label htmlFor="date-input">Date & Time</label>
+                <br></br>
+                <label htmlFor="date-input">Date & Time: </label>
                 <input
                     required
                     type="datetime-local"
@@ -72,8 +72,8 @@ const EventForm = (props) => {
                     value={formData.date}
                     onChange={handleChange}
                 />
-
-                <label htmlFor="location-input">Location</label>
+                <br></br>
+                <label htmlFor="location-input">Location: </label>
                 <input
                     required
                     type="text"
@@ -82,7 +82,8 @@ const EventForm = (props) => {
                     value={formData.location}
                     onChange={handleChange}
                 />
-                <label htmlFor="isPublic-input">Public event?</label>
+                <br></br>
+                <label htmlFor="isPublic-input">Public event? </label>
                 <input
                     type="checkbox"
                     name="isPublic"
@@ -90,8 +91,8 @@ const EventForm = (props) => {
                     checked={!!formData.isPublic}
                     onChange={(e) => setFormData(f => ({ ...f, isPublic: e.target.checked }))}
                 />
-
-                <label htmlFor="capacity-input">Capacity</label>
+                <br></br>
+                <label htmlFor="capacity-input">Capacity: </label>
                 <input
                     required
                     type="text"
@@ -100,7 +101,7 @@ const EventForm = (props) => {
                     value={formData.capacity}
                     onChange={handleChange}
                 />
-
+                <br></br>
                 <button type="submit">SUBMIT</button>
             </form>
         </main>
