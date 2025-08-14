@@ -6,7 +6,7 @@ const NavBar = (props) => {
     <nav className="navbar">
       <div className="nav-inner">
         <Link to="/" className="nav-brand">
-        
+          <img src={logo} alt="Evently Logo" className="nav-logo" />
           Evently
         </Link>
         {/* <Link to="/" className="nav-brand">Evently</Link> */}

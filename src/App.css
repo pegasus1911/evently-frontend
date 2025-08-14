@@ -130,6 +130,11 @@ a.edit-btn:active,button.edit-btn:active{transform:translateY(0);}
 }
 .nav-links a:hover{color:var(--brand-2);background:rgba(96,165,250,.08);opacity:1;}
 .nav-user{color:var(--muted);font-size:13.5px;margin:0 6px;}
+.nav-logo {
+  height: 30px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
 /* ===================================
    CARDS / ARTICLES
 =================================== */
@@ -258,43 +263,10 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
 }
 .chip:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(20,30,70,.25); }
 
-/* ---------- GRID + CARDS (Trending) ---------- */
-.grid{ display:grid; gap:1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-.card-lite{
-  background: rgba(17,22,40,.8); backdrop-filter: blur(6px);
-  border:1px solid #1f2741; border-radius:16px; padding:1rem;
-  display:flex; flex-direction:column; gap:.5rem;
-}
-.card-lite__meta{ display:flex; align-items:center; gap:.5rem; color:#9eb0ff; font-size:.9rem; }
-.meta-pill{ padding:.15rem .5rem; border-radius:999px; background:#1b254a; border:1px solid #2c3c86; }
-.meta-dot{ opacity:.7; }
-.card-lite__title{ margin:0; font-size:1.05rem; }
-.card-lite__desc{ color:#c7cff9; opacity:.9; margin:0 0 .5rem; }
-.card-lite .btn.tiny{ align-self:flex-start; padding:.45rem .7rem; border-radius:10px; }
-
-/* skeleton placeholder */
-.skeleton{ min-height: 150px; background: linear-gradient(90deg, #11172b, #171f3a, #11172b); animation: sk 1.2s infinite; }
-@keyframes sk{ 0%{background-position:-200px 0} 100%{background-position: calc(200px + 100%) 0} }
-
-/* ---------- HOW IT WORKS ---------- */
-.features{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1rem; }
-.feature{
-  background: rgba(17,22,40,.8); border:1px solid #1f2741;
-  border-radius:16px; padding:1rem 1.1rem;
-}
-.f-badge{
-  width:36px;height:36px;border-radius:999px;display:grid;place-items:center;margin-bottom:.5rem;
-  background:#2a3bc7;color:#fff;font-weight:700;
-}
-
  .map-container {
   height: 400px;
   width: 100%;
 } 
-
-/* ---------- FINAL CTA ---------- */
-.final-cta{ text-align:center; padding-bottom: 3rem; }
-
 /* Buttons (shared) */
 .btn{ padding:.7rem 1rem; border-radius:12px; font-weight:600; text-decoration:none; display:inline-block; }
 .btn.primary{ background:#3153ff; color:#fff; }

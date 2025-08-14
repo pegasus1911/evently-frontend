@@ -1,23 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
 
-function EventCardLite({ ev }) {
-  const date = new Date(ev.date || ev.timing || ev.when || ev.createdAt);
-  return (
-    <article className="card-lite">
-      <div className="card-lite__meta">
-        <span className="meta-pill">
-          {date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
-        </span>
-        <span className="meta-dot">•</span>
-        <span className="muted">{ev.location || ev.city || '—'}</span>
-      </div>
-      <h3 className="card-lite__title">{ev.title}</h3>
-      <p className="card-lite__desc">{ev.description?.slice(0, 90) || 'Join us for an awesome event.'}</p>
-      <Link className="btn tiny" to={`/events/${ev._id}`}>View</Link>
-    </article>
-  );
-}
-
 export default function Home({ user, events = [] }) {
   const navigate = useNavigate();
   const onSearch = (e) => {
@@ -62,34 +44,6 @@ export default function Home({ user, events = [] }) {
               {c}
             </button>
           ))}
-        </div>
-      </div>
-
-      {/* HOW IT WORKS */}
-      <div className="section container features">
-        <div className="feature">
-          <div className="f-badge">1</div>
-          <h3>Create</h3>
-          <p>Set title, time, and location. Add a cover if you want.</p>
-        </div>
-        <div className="feature">
-          <div className="f-badge">2</div>
-          <h3>Share</h3>
-          <p>Send one link. Guests can RSVP without an account.</p>
-        </div>
-        <div className="feature">
-          <div className="f-badge">3</div>
-          <h3>Track</h3>
-          <p>See who’s coming and update details anytime.</p>
-        </div>
-      </div>
-
-      {/* FOOTER CTA */}
-      <div className="section container final-cta">
-        <h2>Ready to host your next event?</h2>
-        <div className="home-cta">
-          {user ? <Link to="/events/new" className="btn primary">Create an event</Link>
-                : <Link to="/sign-up" className="btn primary">Get started free</Link>}
         </div>
       </div>
     </section>
