@@ -24,14 +24,12 @@ const SignIn = (props) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault()
-
     const result = await props.handleSignIn(formData)
-
+    console.log(result)
     if (result && result.success) {
       navigate('/')
     } else {
-      
-      setError(result?.message || 'Username or password is incorrect')
+      setError(result.message || 'Username or password is incorrect')
     }
   }
 

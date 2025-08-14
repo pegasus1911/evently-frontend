@@ -50,7 +50,7 @@ const App = () => {
       setUser(res)                                   // now res is the decodedd user
       return { success: true }
     } catch (err) {
-      return { success: false, message: err.message }
+      return { success: false, message: "invalid user or pass word" }
     }
   }
 

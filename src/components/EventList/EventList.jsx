@@ -37,6 +37,7 @@ const EventList = (props) => {
                   📅 {when}
                 </p>
               )}
+              <br></br>
             </article>
           </Link>
         );

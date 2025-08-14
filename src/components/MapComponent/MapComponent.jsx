@@ -1,4 +1,3 @@
-// map componnent
 import React, { useState, useRef } from 'react';
 import {
   GoogleMap,
@@ -30,7 +29,6 @@ function MapComponent({ initialPosition, onLocationChange }) {
       const newPos = { lat: location.lat(), lng: location.lng() };
       setMarkerPosition(newPos);
       if (onLocationChange) {
-        // Pass lat, lng, and locationName (address) back to parent
         onLocationChange({
           lat: newPos.lat,
           lng: newPos.lng,
