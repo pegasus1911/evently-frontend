@@ -10,7 +10,7 @@ The website was built to practice full-stack development using the MERN stack, c
 
 ## 🚀 Getting Started
 
-👉 **Test it here:** (WE WILL DEPLOY AND PUSH AGAIN)
+👉 **Test it here:**  https://evently-frontend-mauve.vercel.app/
 
 👉 **Planning Materials:**
 - [project1_trello] https://trello.com/b/MueYD6cK/events-planning-website
