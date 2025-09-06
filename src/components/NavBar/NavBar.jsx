@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import logo from '../../assets/logo.png';
+// import logo from '../../assets/logo.png';
 
 const NavBar = (props) => {
   return (
     <nav className="navbar">
       <div className="nav-inner">
         <Link to="/" className="nav-brand">
-          <img src={logo} alt="Evently Logo" className="nav-logo" />
+{/*           <img src={logo} alt="Evently Logo" className="nav-logo" /> */}
           Evently
         </Link>
         {/* <Link to="/" className="nav-brand">Evently</Link> */}
